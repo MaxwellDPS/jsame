@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MaxwellDPS/jsame"
+    "url": "git://github.com/MaxwellDPS/jsame"
   },
   "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "author": "Max Watermolen",
