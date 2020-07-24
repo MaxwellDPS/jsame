@@ -156,14 +156,13 @@ function same_decode(same) {
         for (var code in bad_list) { PSSCCC_list.splice(PSSCCC_list.indexOf(bad_list[code]), 1); }
         PSSCCC_list.sort();
         return {
-            "Message": readable_message(ORG, EEE, PSSCCC_list, TTTT, JJJHHMM, STATION, TYPE, LLLLLLLL, COUNTRY),
+            "MESSAGE": readable_message(ORG, EEE, PSSCCC_list, TTTT, JJJHHMM, STATION, TYPE, LLLLLLLL, COUNTRY),
             "ORG": ORG,
             "EEE": EEE,
             "PSSCCC_LIST": PSSCCC_list,
             "TTTT": TTTT,
             "JJJHHMM": JJJHHMM,
             "STATION": STATION,
-            "TYPE": TYPE,
             "LLLLLLLL": LLLLLLLL,
             "COUNTRY": COUNTRY,
             "LLLL-ORG": LLLLLLLL.split("/")[0] + "-" + ORG
