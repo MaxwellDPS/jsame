@@ -14,11 +14,11 @@
   "dependencies": {
     "moment": "^2.18.1"
   },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "repository": {
     "type": "git",
-    "url": "git://github.com/MaxwellDPS/jsame"
+    "url": "git://github.com/MaxwellDPS/jsame.git"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "author": "Max Watermolen",
   "license": "ISC"
 }
