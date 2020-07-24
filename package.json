@@ -1,0 +1,19 @@
+{
+  "name": "jsame",
+  "version": "0.1.0",
+  "description": "js SAME EAS message decoder",
+  "main": "jsame.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "SAME",
+    "EAS",
+    "FIPS"
+  ],
+  "dependencies": {
+    "moment": "^2.18.1"
+  },
+    "author": "Max Watermolen",
+    "license": "ISC"
+  }
