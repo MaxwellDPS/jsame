@@ -1,8 +1,8 @@
 {
   "name": "jsame",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "js SAME EAS message decoder",
-  "main": "jsame.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
