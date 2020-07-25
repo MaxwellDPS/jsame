@@ -17,7 +17,7 @@
   "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/MaxwellDPS/jsame.git"
+    "url": "ssh://git@github.com:MaxwellDPS/jsame.git"
   },
   "author": "Max Watermolen",
   "license": "ISC"
