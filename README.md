@@ -3,7 +3,7 @@
 **jsame** is a JS library to decode [EAS](http://en.wikipedia.org/wiki/Emergency_Alert_System)/[SAME](http://en.wikipedia.org/wiki/Specific_Area_Message_Encoding) (Emergency Alert System/Specific Area Message Encoding) alert messages. These messages are primarily used by the National Weather Service for weather-related warnings. 
 **jsame** will decode a demodulated message, filter by SAME ([US](http://www.nws.noaa.gov/nwr/coverage/county_coverage.html)/[CA](http://www.ec.gc.ca/meteo-weather/default.asp?lang=En&n=E5A4F19C-1)) and/or event code, provide readable object back.
 
-**PLESE DONT TRUST THIS CODE WIT YOUR LIFE... COMMON SENSE GUYS**
+**PLESE DONT TRUST THIS CODE WITH YOUR LIFE... COMMON SENSE GUYS**
 
 ### Requirements
 
@@ -125,8 +125,8 @@ Variable        | Description                       | Example
 
 
 ### Sample output 1
->"EAS: ZCZC-WXR-EWW-31109-055027-055039-055047-055117-055131-055137-055139-055015-055071+0030-0771800-KOAX/NWS-"
->(same_decode(TEST_STRING2, ['RWT', 'DMO', 'RMT'], ['031000']));
+>"EAS: ZCZC-WXR-EWW-055027-055039-055047-055117-055131-055137-055139-055015-055071+0030-0771800-KOAX/NWS-"
+>(same_decode(TEST_STRING2, ['RWT', 'DMO', 'RMT'], ['055000']));
 
 ```json
 { 

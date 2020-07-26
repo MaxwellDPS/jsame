@@ -214,7 +214,3 @@ module.exports = {
         return same_decode(message)
     }
 }
-
-var TEST_STRING2 = "EAS: ZCZC-WXR-EWW-31109-055027-055039-055047-055117-055131-055137-055139-055015-055071+0030-0771800-KOAX/NWS-";
-var Test2 = "ZCZC-CIV-LAE-031000+0030-0771800-KXYZ/NWS-"
-console.log(same_decode(Test2, ['RWT', 'DMO', 'RMT']));
