@@ -1,22 +1,22 @@
-#jsame
+# jsame
 
 **jsame** is a JS library to decode [EAS](http://en.wikipedia.org/wiki/Emergency_Alert_System)/[SAME](http://en.wikipedia.org/wiki/Specific_Area_Message_Encoding) (Emergency Alert System/Specific Area Message Encoding) alert messages. These messages are primarily used by the National Weather Service for weather-related warnings. 
 **jsame** will decode a demodulated message, filter by SAME ([US](http://www.nws.noaa.gov/nwr/coverage/county_coverage.html)/[CA](http://www.ec.gc.ca/meteo-weather/default.asp?lang=En&n=E5A4F19C-1)) and/or event code, provide readable object back.
 
 **PLESE DONT TRUST THIS CODE WIT YOUR LIFE... COMMON SENSE GUYS**
 
-###Requirements
+### Requirements
 
 * [NPM](https://www.npmjs.com/)
 * [NodeJS](https://nodejs.org/en/)
 * [Moment.js](https://momentjs.com/) +2.18.0
 
 
-###Installation
+### Installation
 
 > npm install @maxwelldps/jsame
 
-###Usage
+### Usage
 
 **jsame** can decode EAS messages diectly from multitmon, or in SAME format `ZCZC-ORG-EEE-PSSCCC-PSSCCC+TTTT-JJJHHMM-LLLLLLLL-`
 
@@ -49,7 +49,7 @@ console.log(decodedMeassage["MESSAGE"]);
 ```
 
 
-####Event Codes
+#### Event Codes
 
 *This list includes current and proposed event codes.*
 
@@ -98,7 +98,7 @@ SQW | Snow Squall Warning          |    |
 An alert must match one of each specified alert type in order to be processed. If an alert type is omitted, any alert will match that type. In most cases, using only SAME codes to filter alerts will be the best option.
 
 
-####Output 
+#### Output 
 
 Output is an object with the following
 
@@ -190,13 +190,13 @@ Variable        | Description                       | Example
 
 ```
 
-###Sample Text Output
+### Sample Text Output
 
 >The National Weather Service in Pleasant Hill, Missouri has issued a Required Weekly Test valid until 12:30 PM for the following counties in Kansas: Leavenworth, Wyandotte, Johnson, Miami, and for the following counties in Missouri: Clay, Platte, Jackson, Cass. (KEAX/NWS)
 
 This [experimental pagermon site](https://wx.maxwelldps.com/) is updated using jsame, pagermon, multimon-ng and a rtl-sdr dongle.
 
-###Known Issues
+### Known Issues
 
 ### Credits
 Thanks to [dsame Copyright (c) 2016 Joseph W. Metcalf](https://github.com/cuppa-joe/dsame) from which the code was adapted
