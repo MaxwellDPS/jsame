@@ -56,8 +56,22 @@ function get_event(input) {
     return event;
 }
 
+function FIPS_Exists(PSSCCC_list, includeFIPS) {
+    if (includeFIPS.length > 0) {
+        for (var code in includeFIPS) {
+            var [CCC, SS] = [includeFIPS[code].slice(3), includeFIPS[code].slice(1,3) ];
+            if (CCC == "000") {
+                for (var code2 in PSSCCC_list) {
+                    if (PSSCCC_list[code2].slice(1, 3) == SS) { return true }
+                }
+            } else { if(PSSCCC_list.includes(includeFIPS[code])) { return true } }
+        }
+        return false
+    } else { return true }
+}
+
 // GETS THE END OF THE ALERT FRO JJJHHMM TO SEONDS, IN UTC
-function alert_end(JJJHHMM, TTTT) {
+function alert_end(JJJHHMM, TTTT, format='LT') {
     var ts, utc_dt;
     utc_dt = moment.utc(JJJHHMM, 'DDDHHmm');
     utc_dt.add(TTTT.substring(0, 2), "h").add(TTTT.substring(2, 4), "m")
@@ -65,11 +79,22 @@ function alert_end(JJJHHMM, TTTT) {
     return ts;
 }
 
+function alert_start(JJJHHMM,format='LT') {
+    var ts, utc_dt;
+    utc_dt = moment.utc(JJJHHMM, 'DDDHHmm');
+    ts = moment(utc_dt).local().format(format);
+    return ts;
+}
+
 // GET SECONDS FROM TTTT WHICH FOR AN EVENT THAT LASTS 1 HOUR AND 30 MIN WOULE LOKE LIKE TTTT 0130
-function alert_length(TTTT) {
+function alert_length(TTTT, seconds=true) {
     var delta;
     delta = moment.duration({ hours: parseInt(TTTT.substring(0, 2)), minutes: parseInt(TTTT.substring(2, 4)) })
-    return delta.asSeconds();
+    if (seconds) {
+        return delta.asSeconds();
+    } else {
+        return delta.asMinutes();
+    }
 }
 
 // CONVERTS KNWS/NWS STATION TO LOCAL FORCAST OFFICE koax becomes Omaha, NE Plans to add Local FM/AM stations
@@ -121,7 +146,7 @@ function readable_message(ORG = "WXR", EEE = "RWT", PSSCCC = [], TTTT = "0030", 
     return MSG; // Give back the formatted message
 }
 
-function same_decode(same) {
+function same_decode(same,excludeEEE=[],includeFIPS=[]) {
     var CA_bad_list, COUNTRY, EEE, JJJHHMM, LLLLLLLL, ORG, PSSCCC_list, S1, S2, STATION, TTTT, TYPE, US_bad_list, bad_list, ZCZC, UScounty, CAcounty;
     // Remove the EAS: if not killed prior
     same = same.replace("EAS:", "").toUpperCase().replace(" -", "").replace(" ", "").trim();
@@ -155,18 +180,32 @@ function same_decode(same) {
         bad_list = ((COUNTRY === "US") ? US_bad_list : CA_bad_list);
         for (var code in bad_list) { PSSCCC_list.splice(PSSCCC_list.indexOf(bad_list[code]), 1); }
         PSSCCC_list.sort();
-        return {
-            "MESSAGE": readable_message(ORG, EEE, PSSCCC_list, TTTT, JJJHHMM, STATION, TYPE, LLLLLLLL, COUNTRY),
-            "ORG": ORG,
-            "EEE": EEE,
-            "PSSCCC_LIST": PSSCCC_list,
-            "TTTT": TTTT,
-            "JJJHHMM": JJJHHMM,
-            "STATION": STATION,
-            "LLLLLLLL": LLLLLLLL,
-            "COUNTRY": COUNTRY,
-            "LLLL-ORG": LLLLLLLL.split("/")[0] + "-" + ORG
-        };
+
+        if (!FIPS_Exists(PSSCCC_list, includeFIPS)) { return false } else {
+            if (excludeEEE.includes(EEE)) { return false } else {
+                return {
+                    "MESSAGE": readable_message(ORG, EEE, PSSCCC_list, TTTT, JJJHHMM, STATION, TYPE, LLLLLLLL, COUNTRY),
+                    "ORG": ORG,
+                    "EEE": EEE,
+                    "PSSCCC_LIST": PSSCCC_list,
+                    "TTTT": TTTT,
+                    "JJJHHMM": JJJHHMM,
+                    "STATION": STATION,
+                    "LLLLLLLL": LLLLLLLL,
+                    "COUNTRY": COUNTRY,
+                    "LLLL-ORG": LLLLLLLL.split("/")[0] + "-" + ORG,
+                    "organization": SAME__ORG[ORG]["NAME"][COUNTRY],
+                    "location": get_location(STATION, TYPE),
+                    "event": get_event(EEE),
+                    "type": EEE.slice(-1),
+                    "start": alert_start(JJJHHMM),
+                    "end": alert_end(JJJHHMM, TTTT),
+                    "length": alert_length(TTTT, false),
+                    "seconds": alert_length(TTTT),
+                    "date": alert_start(JJJHHMM, 'dddd, MMMM Do YYYY, h:mm:ss a')
+                };
+            }
+        }
     } else { return false }
 }
 
@@ -176,4 +215,6 @@ module.exports = {
     }
 }
 
-console.log(same_decode(TEST_STRING));
+var TEST_STRING2 = "EAS: ZCZC-WXR-EWW-31109-055027-055039-055047-055117-055131-055137-055139-055015-055071+0030-0771800-KOAX/NWS-";
+var Test2 = "ZCZC-CIV-LAE-031000+0030-0771800-KXYZ/NWS-"
+console.log(same_decode(Test2, ['RWT', 'DMO', 'RMT']));

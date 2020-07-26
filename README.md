@@ -14,11 +14,24 @@
 
 ###Installation
 
->npm install jsame --save
+> npm install @maxwelldps/jsame
 
 ###Usage
 
-**jsame** can decode EAS messages from multitmon, directly from the output of an external command, or by capturing the ouput of a shell script/batch file or external program. Use `msg` for command line decoding. The `source` command is used to capture and decode the output of a script or program. Without one of these options, standard input is used. Press `CTRL-C` to exit the program.
+**jsame** can decode EAS messages diectly from multitmon, or in SAME format `ZCZC-ORG-EEE-PSSCCC-PSSCCC+TTTT-JJJHHMM-LLLLLLLL-`
+
+>jsame.decode(Message, List of EEE to exclude, List of FIPS to watch )
+
+Example to watch for Lancatser County NE, and not exclude events.
+>jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", [], ['031109'])
+
+
+Exlude Required Weekly tests
+>jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", ['RWT'])
+
+Exlude Required Weekly tests, and Match state of NE
+>jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", ['RWT'], ['031109'])
+
 
 Example input
 >ZCZC-WXR-RWT-055027-055039-055047-055117-055131-055137-055139-055015-055071+0030-0771800-KMKX/NWS-
@@ -89,50 +102,91 @@ An alert must match one of each specified alert type in order to be processed. I
 
 Output is an object with the following
 
-Variable      | Description                       | Example
-:-------------|:----------------------------------|:------------------
- ORG          | Organization code                 | WXR
- EEE          | Event code                        | RWT
- PSSCCC       | Geographical area (SAME) codes    | 020103-020209-020091-020121-029047-029165-029095-029037
- TTTT         | Purge time code                   | 0030
- JJJHHMM      | Date code                         | 1051700
- LLLLLLLL     | Originator code                   | KEAX/NWS
- COUNTRY      | Country code                      | US
- LLLL-ORG     | Originating station - Org code    | KEAX-WXR
- MESSAGE      | Readable message                  | *(See sample text output below)*
+Variable        | Description                       | Example
+:---------------|:----------------------------------|:------------------
+ MESSAGE        | Readable message                  | *(See sample text output below)*
+ ORG            | Organization code                 | WXR
+ EEE            | Event code                        | RWT
+ PSSCCC         | Geographical area (SAME) codes    | 020103-020209-020091-020121-029047-029165-029095-029037
+ TTTT           | Purge time code                   | 0030
+ JJJHHMM        | Date code                         | 1051700
+ LLLLLLLL       | Originator code                   | KEAX/NWS
+ COUNTRY        | Country code                      | US
+ LLLL-ORG       | Originating station - Org code    | KEAX-WXR
+ {organization} | Organization name                 | National Weather Service
+ {location}     | Originator location               | Pleasant Hill, Missouri
+ {event}        | Event type                        | Required Weekly Test
+ {type}         | Event type indicator              | T
+ {start}        | Start time                        | 12:00 PM
+ {end}          | End time                          | 12:30 PM
+ {length}       | Length of event                   | 30 minutes
+ {seconds}      | Event length in seconds           | 1800 
+ {date}         | Local date                        | Tuesday, March 17th 2020, 1:00:00 pm
 
 
 ### Sample output 1
+>"EAS: ZCZC-WXR-EWW-31109-055027-055039-055047-055117-055131-055137-055139-055015-055071+0030-0771800-KOAX/NWS-"
+>(same_decode(TEST_STRING2, ['RWT', 'DMO', 'RMT'], ['031000']));
 
 ```json
-{ MESSAGE: 'The National Weather Service in Omaha, NE has issued a Extreme Wind Warning valid until 6:30 PM for the following counties in Kansas: Johnson, Miami, Wyandotte, and for the following counties in Missouri: Cass, Clay, Jackson, Platte, and for the following counties in Nebraska: Lancaster. (KOAX/NWS)',
+{ 
+  MESSAGE: 'The National Weather Service in Omaha, NE has issued a Extreme Wind Warning valid until 1:30 PM for the following counties in Wisconsin: Calumet, Dodge, Fond du Lac, Green Lake, Manitowoc, Sheboygan, Washington, Waushara, Winnebago. (KOAX/NWS)',
   ORG: 'WXR',
   EEE: 'EWW',
-  PSSCCC_LIST:[ '020091','020121','020209','029037','029047','029095','029165','031109' ],
+  PSSCCC_LIST:
+   [ '055015',
+     '055027',
+     '055039',
+     '055047',
+     '055071',
+     '055117',
+     '055131',
+     '055137',
+     '055139' ],
   TTTT: '0030',
-  JJJHHMM: '3650000',
+  JJJHHMM: '0771800',
   STATION: 'KOAX',
-  TYPE: 'NWS',
   LLLLLLLL: 'KOAX/NWS',
   COUNTRY: 'US',
-  'LLLL-ORG': 'KOAX-WXR' 
- }
+  'LLLL-ORG': 'KOAX-WXR',
+  organization: 'National Weather Service',
+  location: 'Omaha, NE ',
+  event: 'Extreme Wind Warning',
+  type: 'W',
+  start: '1:00 PM',
+  end: '1:30 PM',
+  length: 30,
+  seconds: 1800,
+  date: 'Tuesday, March 17th 2020, 1:00:00 pm' 
+}
 ```
 
 ### Sample output 2
+>"ZCZC-CIV-LAE-000000+0030-0771800-KXYZ/FM-"
+>(same_decode(TEST_STRING2, ['RWT', 'DMO', 'RMT']));
+
 ```json
-{ MESSAGE: 'The Emergency Action Notification Network   has issued a Emergency Action Notification valid until 6:30 PM for the following counties in Missouri: ALL. (KUCV/FM)',
-  ORG: 'EAN',
-  EEE: 'EAN',
-  PSSCCC_LIST: [ '029000' ],
+{ 
+  MESSAGE: 'The Civil Authorities in undefined have issued a Local Area Emergency valid until 1:30 PM for the following counties in Nebraska: ALL. (KXYZ/NWS)',
+  ORG: 'CIV',
+  EEE: 'LAE',
+  PSSCCC_LIST: [ '031000' ],
   TTTT: '0030',
-  JJJHHMM: '3650000',
-  STATION: 'KUCV',
-  TYPE: 'FM',
-  LLLLLLLL: 'KUCV/FM',
+  JJJHHMM: '0771800',
+  STATION: 'KXYZ',
+  LLLLLLLL: 'KXYZ/NWS',
   COUNTRY: 'US',
-  'LLLL-ORG': 'KUCV-EAN' 
-  }
+  'LLLL-ORG': 'KXYZ-CIV',
+  organization: 'Civil Authorities',
+  location: 'undefined ',
+  event: 'Local Area Emergency',
+  type: 'E',
+  start: '1:00 PM',
+  end: '1:30 PM',
+  length: 30,
+  seconds: 1800,
+  date: 'Tuesday, March 17th 2020, 1:00:00 pm'
+}
 
 ```
 
