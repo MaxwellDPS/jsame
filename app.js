@@ -105,7 +105,7 @@ function get_location(STATION = null, TYPE = null) {
         location = ((TYPE === "NWS") ? WFO_LIST[STATION] + " " : "");
     } else {
         location = "";
-        location = get_Station(STATION, TYPE);
+        //location = get_Station(STATION, TYPE);
     }
     return location;
 }
@@ -231,6 +231,4 @@ module.exports = {
     }
 }
 
-//console.log(get_Station("KUCV/FM"));
-console.log(same_decode("ZCZC-WXR-BLU-071100-071400-025300-028300+0030-0771800-KMKX/NWS"))
-console.log(same_decode("ZCZC-WXR-BLU-071100-071400-025300-028300+0030-0771800-KUCV/FM"))
+
