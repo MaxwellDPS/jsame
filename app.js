@@ -233,4 +233,4 @@ module.exports = {
     }
 }
 
-console.log(same_decode("ZCZC-WXR-TOR-031109+0015-3650000-KOAX/NWS -", ["RWT","LAE"], ["00000"]))
+
