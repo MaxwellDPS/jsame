@@ -1,6 +1,6 @@
 {
   "name": "@maxwelldps/jsame",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "js SAME EAS message decoder",
   "main": "app.js",
   "keywords": [
