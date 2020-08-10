@@ -61,6 +61,7 @@ function FIPS_Exists(PSSCCC_list, includeFIPS) {
     if (includeFIPS.length > 0) {
         for (var code in includeFIPS) {
             if (includeFIPS[code].length == 5) { includeFIPS[code] = "0" + includeFIPS[code] }
+            if (includeFIPS[code].slice(1) === "00000") { return true}
             var [CCC, SS] = [includeFIPS[code].slice(3), includeFIPS[code].slice(1,3) ];
             if (CCC == "000") {
                 for (var code2 in PSSCCC_list) {
@@ -232,3 +233,4 @@ module.exports = {
     }
 }
 
+console.log(same_decode("ZCZC-WXR-TOR-031109+0015-3650000-KOAX/NWS -", ["RWT","LAE"], ["00000"]))
