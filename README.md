@@ -113,15 +113,15 @@ Variable        | Description                       | Example
  LLLLLLLL       | Originator code                   | KEAX/NWS
  COUNTRY        | Country code                      | US
  LLLL-ORG       | Originating station - Org code    | KEAX-WXR
- {organization} | Organization name                 | National Weather Service
- {location}     | Originator location               | Pleasant Hill, Missouri
- {event}        | Event type                        | Required Weekly Test
- {type}         | Event type indicator              | T
- {start}        | Start time                        | 12:00 PM
- {end}          | End time                          | 12:30 PM
- {length}       | Length of event                   | 30 minutes
- {seconds}      | Event length in seconds           | 1800 
- {date}         | Local date                        | Tuesday, March 17th 2020, 1:00:00 pm
+ organization   | Organization name                 | National Weather Service
+ location       | Originator location               | Pleasant Hill, Missouri
+ event          | Event type                        | Required Weekly Test
+ type           | Event type indicator              | T
+ start          | Start time                        | 12:00 PM
+ end            | End time                          | 12:30 PM
+ length         | Length of event                   | 30 minutes
+ seconds        | Event length in seconds           | 1800 
+ date           | Local date                        | Tuesday, March 17th 2020, 1:00:00 pm
 
 
 ### Sample output 1
