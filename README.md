@@ -23,15 +23,19 @@
 >jsame.decode(Message, List of EEE to exclude, List of FIPS to watch )
 
 Example to watch for Lancatser County NE, and not exclude events.
->jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", [], ["031109"])
-
+```js
+jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", [], ["031109"])
+```
 
 Exlude Required Weekly tests
->jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", ["RWT"])
+```js
+jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", ["RWT"])
+```
 
 Exlude Required Weekly tests, and Match state of NE
->jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", ["RWT"], ["031109"])
-
+```js
+jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", ["RWT"], ["031109"])
+```
 
 Example input
 >ZCZC-WXR-RWT-055027-055039-055047-055117-055131-055137-055139-055015-055071+0030-0771800-KMKX/NWS-
