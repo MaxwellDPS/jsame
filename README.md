@@ -182,7 +182,7 @@ Variable        | Description                       | Example
   "event": "Local Area Emergency",
   "type": "E",
   "start": "1:00 PM",
-  "end": "1":30 PM",
+  "end": "1:30 PM",
   "length": 30,
   "seconds": 1800,
   "date": "Tuesday, March 17th 2020, 1:00:00 pm"
