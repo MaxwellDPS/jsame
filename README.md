@@ -23,14 +23,14 @@
 >jsame.decode(Message, List of EEE to exclude, List of FIPS to watch )
 
 Example to watch for Lancatser County NE, and not exclude events.
->jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", [], ['031109'])
+>jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", [], ["031109"])
 
 
 Exlude Required Weekly tests
->jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", ['RWT'])
+>jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", ["RWT"])
 
 Exlude Required Weekly tests, and Match state of NE
->jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", ['RWT'], ['031109'])
+>jsame.decode("ZCZC-WXR-RWT-031109+0030-0771800-KOAX/NWS", ["RWT"], ["031109"])
 
 
 Example input
@@ -40,7 +40,7 @@ Example input
 >EAS:  ZCZC-WXR-RWT-055027-055039-055047-055117-055131-055137-055139-055015-055071+0030-0771800-KMKX/NWS     -
 
 ```js
-var SAME = require('./dsame.js'); 
+var SAME = require("./dsame.js"); 
 
 Message = "ZCZC-WXR-RWT-055027-055039-055047-055117-055131-055137-055139-055015-055071+0030-0771800-KMKX/NWS-";
 
@@ -126,66 +126,66 @@ Variable        | Description                       | Example
 
 ### Sample output 1
 >"EAS: ZCZC-WXR-EWW-055027-055039-055047-055117-055131-055137-055139-055015-055071+0030-0771800-KOAX/NWS-"
->(same_decode(TEST_STRING2, ['RWT', 'DMO', 'RMT'], ['055000']));
+>(same_decode(TEST_STRING2, ["RWT", "DMO", "RMT"], ["055000"]));
 
 ```json
 { 
-  MESSAGE: 'The National Weather Service in Omaha, NE has issued a Extreme Wind Warning valid until 1:30 PM for the following counties in Wisconsin: Calumet, Dodge, Fond du Lac, Green Lake, Manitowoc, Sheboygan, Washington, Waushara, Winnebago. (KOAX/NWS)',
-  ORG: 'WXR',
-  EEE: 'EWW',
-  PSSCCC_LIST:
-   [ '055015',
-     '055027',
-     '055039',
-     '055047',
-     '055071',
-     '055117',
-     '055131',
-     '055137',
-     '055139' ],
-  TTTT: '0030',
-  JJJHHMM: '0771800',
-  STATION: 'KOAX',
-  LLLLLLLL: 'KOAX/NWS',
-  COUNTRY: 'US',
-  'LLLL-ORG': 'KOAX-WXR',
-  organization: 'National Weather Service',
-  location: 'Omaha, NE ',
-  event: 'Extreme Wind Warning',
-  type: 'W',
-  start: '1:00 PM',
-  end: '1:30 PM',
-  length: 30,
-  seconds: 1800,
-  date: 'Tuesday, March 17th 2020, 1:00:00 pm' 
+  "MESSAGE": "The National Weather Service in Omaha, NE has issued a Extreme Wind Warning valid until 1:30 PM for the following counties in Wisconsin: Calumet, Dodge, Fond du Lac, Green Lake, Manitowoc, Sheboygan, Washington, Waushara, Winnebago. (KOAX/NWS)",
+  "ORG": "WXR",
+  "EEE": "EWW",
+  "PSSCCC_LIST":
+   [ "055015",
+     "055027",
+     "055039",
+     "055047",
+     "055071",
+     "055117",
+     "055131",
+     "055137",
+     "055139" ],
+  "TTTT": "0030",
+  "JJJHHMM": "0771800",
+  "STATION": "KOAX",
+  "LLLLLLLL": "KOAX/NWS",
+  "COUNTRY": "US",
+  "LLLL-ORG": "KOAX-WXR",
+  "organization": "National Weather Service",
+  "location": "Omaha, NE ",
+  "event": "Extreme Wind Warning",
+  "type": "W",
+  "start": "1:00 PM",
+  "end": "1:30 PM",
+  "length": 30,
+  "seconds": 1800,
+  "date": "Tuesday, March 17th 2020, 1:00:00 pm" 
 }
 ```
 
 ### Sample output 2
 >"ZCZC-CIV-LAE-000000+0030-0771800-KXYZ/FM-"
->(same_decode(TEST_STRING2, ['RWT', 'DMO', 'RMT']));
+>(same_decode(TEST_STRING2, ["RWT", "DMO", "RMT"]));
 
 ```json
 { 
-  MESSAGE: 'The Civil Authorities in undefined have issued a Local Area Emergency valid until 1:30 PM for the following counties in Nebraska: ALL. (KXYZ/NWS)',
-  ORG: 'CIV',
-  EEE: 'LAE',
-  PSSCCC_LIST: [ '031000' ],
-  TTTT: '0030',
-  JJJHHMM: '0771800',
-  STATION: 'KXYZ',
-  LLLLLLLL: 'KXYZ/NWS',
-  COUNTRY: 'US',
-  'LLLL-ORG': 'KXYZ-CIV',
-  organization: 'Civil Authorities',
-  location: 'undefined ',
-  event: 'Local Area Emergency',
-  type: 'E',
-  start: '1:00 PM',
-  end: '1:30 PM',
-  length: 30,
-  seconds: 1800,
-  date: 'Tuesday, March 17th 2020, 1:00:00 pm'
+  "MESSAGE": "The Civil Authorities in undefined have issued a Local Area Emergency valid until 1:30 PM for the following counties in Nebraska: ALL. (KXYZ/NWS)",
+  "ORG": "CIV",
+  "EEE": "LAE",
+  "PSSCCC_LIST": [ "031000" ],
+  "TTTT": "0030",
+  "JJJHHMM": "0771800",
+  "STATION": "KXYZ",
+  "LLLLLLLL": "KXYZ/NWS",
+  "COUNTRY": "US",
+  "LLLL-ORG": "KXYZ-CIV",
+  "organization": "Civil Authorities",
+  "location": "undefined ",
+  "event": "Local Area Emergency",
+  "type": "E",
+  "start": "1:00 PM",
+  "end": "1":30 PM",
+  "length": 30,
+  "seconds": 1800,
+  "date": "Tuesday, March 17th 2020, 1:00:00 pm"
 }
 
 ```
