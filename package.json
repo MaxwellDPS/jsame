@@ -11,8 +11,7 @@
     "FSK"
   ],
   "dependencies": {
-    "moment": "^2.18.1",
-    "axios": "^0.19.2"
+    "moment": "^2.18.1"
   },
   "publishConfig": { "registry": "https://registry.npmjs.org/" },
   "repository": {
